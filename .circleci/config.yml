@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@4.29.149
+  slack: circleci/slack@4.12.1
 
 
 commands:
@@ -146,12 +146,12 @@ jobs:
 
   notify_on_success: 
     docker:
-        - image: cimg/base
+        - image: 'cimg/base-stable'
     steps:
       - slack/notify:
             event: pass
             channel: fwd-cicd
-            template: success_tagged_deployment_1         
+            template: success_tagged_deploy_1       
 
 #   deploy-infrastructure:
 #     docker:
