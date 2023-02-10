@@ -148,10 +148,10 @@ jobs:
     docker:
         - image: cimg/base
     steps:
-      -slack/notify:
-          event: pass
-          channel: fwd-cicd
-          template: success_tagged_deployment_1         
+      - slack/notify:
+            event: pass
+            channel: fwd-cicd
+            template: success_tagged_deployment_1         
 
 #   deploy-infrastructure:
 #     docker:
