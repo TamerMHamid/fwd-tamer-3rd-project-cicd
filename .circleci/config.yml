@@ -101,7 +101,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-dependences]
+          keys: [frontend-dependences]
       - run:
           name: front-end scan
           command: |
