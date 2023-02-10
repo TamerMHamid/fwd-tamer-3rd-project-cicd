@@ -1,6 +1,8 @@
 version: 2.1
 
 orbs:
+#how to integrate slack
+#https://circleci.com/developer/orbs/orb/circleci/slack#jobs-on-hold
   slack: circleci/slack@4.12.1
 
 
