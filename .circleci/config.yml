@@ -273,7 +273,7 @@ jobs:
             # export KVDB_BUKET=$KVDB_BUKET
             # echo "KVDB_BUKET==$KVDB_BUKET"
             #   curl -d '1' https://kvdb.io/${KVDB_BUKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}
-            if grep -q "has been excuted successfully." ~/project/backend/migrations_dump.txt
+            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               echo "sucess"
               echo "${CIRCLE_WORKFLOW_ID:0:7}"
