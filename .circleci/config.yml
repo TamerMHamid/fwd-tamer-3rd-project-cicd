@@ -274,7 +274,7 @@ jobs:
             echo "KVDB_BUKET==$KVDB_BUKET"
             if grep -q "has been excuted successfully." ~/project/backend/migrations_dump.txt
             then
-              curl https://kvdb.io/2xUKChgegBwMqr8mh7caSF/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+              curl https://kvdb.io/2xUKChgegBwMqr8mh7caSF/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
 
             fi
       - destroy-environment     
