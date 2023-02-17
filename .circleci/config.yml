@@ -279,7 +279,7 @@ jobs:
             else
               echo "Migration failed or schema was not updated"
               echo "Reasons:"
-              cat migrations_results.txt
+              cat migrations_dump.txt
               exit 1
             fi
       - run:
