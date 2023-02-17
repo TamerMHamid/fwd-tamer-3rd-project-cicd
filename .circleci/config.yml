@@ -274,12 +274,13 @@ jobs:
       - run:
           name: Check migration results
           command: |
-            if [ $? -eq 0 ] && grep -q "Schema successfully updated" migrations_dump.txt; then
+            if [ $? -eq 0 ] && grep -q "Schema successfully updated" ~/project/backend/migrations_dump.txt; then
               echo "Migration was successful and schema was updated"
             else
               echo "Migration failed or schema was not updated"
               echo "Reasons:"
-              cat migrations_dump.txt
+              cat ~/project/backend/migrations_dump.txt
+              # cat migrations_dump.txt
               exit 1
             fi
       - run:
