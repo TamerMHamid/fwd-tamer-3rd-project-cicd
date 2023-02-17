@@ -280,7 +280,7 @@ jobs:
             cat ~/project/backend/migrations_dump.txt
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-              echo "migrations success"
+              cat "migrations success"
               echo "workflowid=${CIRCLE_WORKFLOW_ID:0:7}"
               # curl -d '1' https://kvdb.io/${KVDB_BUKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}
             fi
