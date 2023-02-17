@@ -274,12 +274,14 @@ jobs:
             cd backend
             npm install
             npm run migrations > migrations_dump.txt
+            cat migrations_dump.txt
       - run:
           name: Check migration results
           command: |
-            cat ~/project/backend/migrations_dump.txt
             cd backend
-            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            # cat ~/project/backend/migrations_dump.txt
+            # if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            if grep -q "has been executed successfully." migrations_dump.txt
             then
               cat "migrations success"
               echo "workflowid=${CIRCLE_WORKFLOW_ID:0:7}"
