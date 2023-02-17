@@ -449,15 +449,25 @@ jobs:
       - run:
           name: Save old workflow id to kvdb.io
           command: |
+            # # export OLD_WORKFLOW_ID=$(aws cloudformation \
+            # #             list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
+            # #             --no-paginate --output text)
             # export OLD_WORKFLOW_ID=$(aws cloudformation \
-            #             list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-            #             --no-paginate --output text)
-            export OLD_WORKFLOW_ID=$(aws cloudformation \
+            #     list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
+            #     --no-paginate --output text)
+            # echo "Old Work flow ID: $OLD_WORKFLOW_ID"
+            # curl -d "${OLD_WORKFLOW_ID}" https://kvdb.io/${KVDB_BUKET}/old_workflow_id
+            # # ${CIRCLE_WORKFLOW_ID:0:7}
+              export OLD_WORKFLOW_ID=$(aws cloudformation \
                 list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
                 --no-paginate --output text)
-            echo "Old Work flow ID: $OLD_WORKFLOW_ID"
-            curl -d "${OLD_WORKFLOW_ID}" https://kvdb.io/${KVDB_BUKET}/old_workflow_id
-            # ${CIRCLE_WORKFLOW_ID:0:7}
+              echo "list-exports command output: $OLD_WORKFLOW_ID"
+              if [ -z "$OLD_WORKFLOW_ID" ]; then
+                  echo "ERROR: No value returned for WorkflowID export"
+              else
+                  echo "Old workflow ID: $OLD_WORKFLOW_ID"
+                  curl -d "${OLD_WORKFLOW_ID}" https://kvdb.io/${KVDB_BUKET}/old_workflow_id
+              fi
       - run:
           name: Update cloudfront distribution
           command: |
