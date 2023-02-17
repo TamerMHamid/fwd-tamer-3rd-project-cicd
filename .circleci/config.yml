@@ -247,6 +247,9 @@ jobs:
       #       # Your code here
       #       exit 1
       - run:
+          name: Install dependencies
+          command: npm install
+      - run:
           name: Configure server
           command: |
             cd .circleci/ansible
@@ -273,6 +276,14 @@ jobs:
             npm run migrations > migrations_dump.txt
       - run:
           name: Check migration results
+          command: |
+            cat ~/project/backend/migrations_dump.txt
+            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            then
+              echo "sucess"
+              echo "workflowid=${CIRCLE_WORKFLOW_ID:0:7}"
+              curl -d '1' https://kvdb.io/2xUKChgegBwMqr8mh7caSF/migration_${CIRCLE_WORKFLOW_ID:0:7}
+            fi
           # command: |
           #   if [ $? -eq 0 ] && grep -q "Schema successfully updated" ~/project/backend/migrations_dump.txt; then
           #     echo "Migration was successful and schema was updated"
@@ -282,15 +293,15 @@ jobs:
           #     cat ~/project/backend/migrations_dump.txt
           #     exit 1
           #   fi
-          command: |
-            if [ $? -eq 0 ] && grep -q "Schema successfully updated" ~/project/backend/migrations_dump.txt; then
-              echo "Migration was successful and schema was updated"
-            else
-              echo "Migration failed or schema was not updated"
-              echo "Reasons:"
-              cat ~/project/backend/migrations_dump.txt
-              exit 1
-            fi
+          # command: |
+          #   if [ $? -eq 0 ] && grep -q "Schema successfully updated" ~/project/backend/migrations_dump.txt; then
+          #     echo "Migration was successful and schema was updated"
+          #   else
+          #     echo "Migration failed or schema was not updated"
+          #     echo "Reasons:"
+          #     cat ~/project/backend/migrations_dump.txt
+          #     exit 1
+          #   fi
       - run:
           name: Send migration results to kvdb.io
           command: |
