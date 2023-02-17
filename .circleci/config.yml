@@ -246,9 +246,9 @@ jobs:
       #     command: |
       #       # Your code here
       #       exit 1
-      - run:
-          name: Install dependencies
-          command: npm install
+      # - run:
+      #     name: Install dependencies
+      #     command: npm install
       - run:
           name: Configure server
           command: |
